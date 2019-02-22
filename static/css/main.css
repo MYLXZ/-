@@ -1,0 +1,132 @@
+* { margin: 0; padding: 0;}
+html,body,#app,.wrapper { width: 100%; height: 100%;}
+body {font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;}
+a {text-decoration: none}
+button,input,select,textarea{font-size:100%;vertical-align:baseline;*vertical-align:middle;}
+textarea{overflow:auto;vertical-align:top;resize:none;}
+button,input,textarea{line-height:normal;font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;*overflow:visible;}
+ul,li,dl,dd,dt,ol{list-style:none;}
+.clearfix:before,.clearfix:after{display:table;content:" ";}
+.clearfix:after,.clear{clear:both;}
+.clearfix{zoom:1;}
+
+.fs12{font-size:12px;}
+.fs14{font-size:14px;}
+.fs16{font-size:16px;}
+.fs18{font-size:18px;}
+.fs20{font-size:20px;}
+.fs22{font-size:22px;}
+.fs24{font-size:24px;}
+.fs26{font-size:26px;}
+.fs30{font-size:30px;}
+.fs40{font-size:50px;}
+.fs50{font-size:50px;}
+.fwb{font-weight:bold;}
+.fwn{font-weight:normal;}
+.ti2{text-indent:2em;}
+.tdu{text-decoration:underline;}
+.tdn{text-decoration:none;}
+.tal{text-align:left;}
+.tac{text-align:center;}
+.tar{text-align:right;}
+.vam{vertical-align:middle;}
+.vat{vertical-align:top;}
+.mc{margin-left:auto;margin-right:auto;}
+.fl{float:left;}
+.fr{float:right;}
+.pr{position:relative;}
+.pa{position:absolute;}
+.pf{position:fixed;}
+.hidden{overflow:hidden;}
+.oh{width:100%;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;}
+.oh_2{-webkit-line-clamp:2;}
+.oh_3{-webkit-line-clamp:3;}
+.block{display:block;}
+.iblock{display:inline-block;}
+.none{display:none;}
+.cp{cursor:pointer;}
+
+[class*=" el-icon-lx"], [class^=el-icon-lx] {font-family: lx-iconfont!important;}
+
+.el-icon-edit-outline{color:#ffc966;}
+.el-icon-info{color:#448eff;}
+.el-icon-delete{color:#f00;}
+
+.content-box { position: absolute; left: 250px; right: 0; top: 70px; bottom: 0; overflow-y: scroll; -webkit-transition: left .3s ease-in-out; transition: left .3s ease-in-out; background: #f0f0f0;}
+.content { width: auto; padding: 20px;}
+.content-collapse { left: 65px;}
+.container { padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 5px;margin:15px;}
+.container .container-title{ margin:-30px -30px 20px -30px; background: #fff; border-bottom:1px solid #eee;padding: 0 30px;min-height:48px; line-height:48px; font-size:15px; color:#666; border-radius:5px 5px 0 0;}
+.container .pagination{ margin:20px 0 0 0;}
+.crumbs { margin-bottom: 20px;}
+.pagination { margin: 20px 0; text-align: right;}
+.plugins-tips { padding: 20px 10px; margin-bottom: 20px;}
+.el-button+.el-tooltip { margin-left: 10px;}
+.el-table tr:hover { background: #f6faff;}
+.mgb20 { margin-bottom: 20px;}
+.move-enter-active,.move-leave-active { transition: opacity .5s;}
+.move-enter,.move-leave { opacity: 0;}
+
+/*BaseForm*/
+.form-box { width: 600px;}
+.form-box .line { text-align: center;}
+.el-time-panel__content::after,.el-time-panel__content::before { margin-top: -7px;}
+.el-time-spinner__wrapper .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) { padding-bottom: 0;}
+
+/*Upload*/
+.pure-button { width: 150px; height: 40px; line-height: 40px; text-align: center; color: #fff; border-radius: 3px;}
+.g-core-image-corp-container .info-aside { height: 45px;}
+.el-upload--text { background-color: #fff; border: 1px dashed #d9d9d9; border-radius: 6px; box-sizing: border-box; width: 170px; height: 170px; text-align: center; cursor: pointer; position: relative; overflow: hidden;}
+.el-upload--text .el-icon-upload { font-size: 67px; color: #97a8be; margin: 40px 0 16px; line-height: 50px;}
+.el-upload--text { color: #97a8be; font-size: 14px; text-align: center;}
+.el-upload--text em { font-style: normal;}
+
+/*VueEditor*/
+.ql-container { min-height: 400px;}
+.ql-snow .ql-tooltip { transform: translateX(117.5px) translateY(10px) !important;}
+.editor-btn { margin-top: 20px;}
+
+/*markdown*/
+.v-note-wrapper .v-note-panel { min-height: 500px;}
+
+
+.item-title{ height:42px; background:#f6f6f6; margin-bottom:20px;}
+.item-title span{ font-size:14px; color:#666; height:22px; line-height:22px;display:block; margin:10px 0 0 20px; border-left:5px solid #ff7070; padding-left:10px; float:left;}
+.item-add-list .el-row{margin-bottom:10px;}
+.item-detail .el-row{margin-bottom:20px;}
+.item-add-list .el-select,.item-add-list .el-date-editor{width:100%;}
+font{color:#ff3f3f; font-size:18px; line-height:24px; vertical-align:middle;}
+.item-detail .el-col{ line-height:24px; min-height:24px; font-size:16px; color:#666;}
+.item-title button{ float:right; display: inline-block; white-space: nowrap; cursor: pointer; border: 1px solid #67c23a; text-align: center; -webkit-box-sizing: border-box; box-sizing: border-box; outline: 0; margin:5px 10px 0 0; padding:8px 15px; font-size: 12px; border-radius: 4px;background-color: #67c23a;color:#fff;}
+
+
+
+.el-col-12 .el-form-item__label{ width:34%;}
+.el-col-12 .el-form-item__content{ margin-left:34%;}
+.el-col-24 .el-form-item__label{ width:17%;}
+.el-col-24 .el-form-item__content{ margin-left:17%;}
+.el-form-item__content .el-form-item__content{ margin-left:0;}
+.el-dialog .el-form-item__content .el-form-item{margin-bottom:0;}
+
+/*登录*/
+/*.login-wrap{position: relative;width:100%; height:100%; background-image:url(../img/login_01.jpg); background-position:50% 50%; background-size:cover; background-repeat:no-repeat;}
+.ms-title{position: absolute;top:50%;width:100%;margin-top: -230px;text-align: center;font-size:30px;color: #fff;}
+.ms-logo{ position:absolute; left:50px; top:50px; height:90px;}
+.ms-login{position: absolute; left:50%; top:50%; width:1020px; height:480px; margin:-240px 0 0 -510px; background-image:url(../img/login_02.png); background-position:50% 50%;background-size:cover;background-repeat:no-repeat;}
+.ms-login-left{ width:510px; float: left;}
+.ms-login-left .h1{ margin: 46px 0 0 70px; font-size:48px; color:#000; font-weight: bold;}
+.ms-login-left .h2{ line-height:32px; font-size:24px; color:#000; margin:10px 0 0 70px; }
+.ms-login-right{ width:281px; float:right; height:409px; background:#fff; border-radius:0 20px 20px 0; overflow: hidden; padding:36px 92px 0; margin:6px 20px 0 0;}
+.login-title{ height:38px; line-height:38px; font-size:36px; border-right:5px solid #27599F; text-align: right; padding-right:10px; margin:0 -30px 65px 0;}
+.ms-login-right .login-input input{ height:42px; line-height:40px; border-radius:20px;background:#e7e7e7; font-size:16px; color:#888;}
+.ms-login-right .el-input--prefix .el-input__inner{ padding-left:45px;}
+.ms-login-right .el-input__icon{ line-height:40px; font-size:22px; margin-left:10px; font-weight:normal; color:#959595;}
+.login-btn{text-align: center;padding-top:40px;}
+.login-btn button{width:100%;height:40px;background:#27599F; border:1px solid #27599F;font-size:18px;border-radius:20px;}
+.login-btn button:hover{background:#216cd5; border:1px solid #216cd5;}
+*/
+/*弹层输入*/
+.el-dialog__body{ padding:20px;}
+.el-dialog .el-form-item{margin-bottom:15px;}
+.el-dialog .el-form-item .el-row{margin-bottom:0;}
