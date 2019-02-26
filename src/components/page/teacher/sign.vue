@@ -1,6 +1,6 @@
 <template ref="chatContent">
     <div class="table" >
-        <div class="container" >
+        <div class="container">
             <el-form :model="form" ref="form" class="item-add-list">
               <el-form-item label="请选择班级">
                     <el-select v-model="lesson" filterable placeholder="请选择班级" @change="handelchange">
@@ -20,7 +20,7 @@
                     </el-radio-group>
                   </el-form-item>
               </template>  
-              <template  v-for="(item, index) in list" v-if='index==9'>
+              <div  v-for="(item, index) in list" v-if='index==9' v-show="typeshow">
                 <div>{{item.itemName[0]}}</div>
                 <div>{{item.itemName[1]}}</div>                
                  <el-form-item>
@@ -30,23 +30,26 @@
                       <el-radio label="3">小组作业</el-radio>
                     </el-radio-group>
                   </el-form-item>
-              </template>   
+              </div>   
               <template  v-for="(item, index) in list" v-if='index==8'>
                 <div>{{item.itemName[0]}}</div>
                 <div>{{item.itemName[1]}}</div>                
                  <el-form-item>
-                    <el-radio-group v-model="item.exam">
-                      <el-radio label="1">是</el-radio>
-                      <el-radio label="0">否</el-radio>
+                    <el-radio-group v-model="item.exam" @change="changehome">
+                      <el-radio label="1"  value="1">是</el-radio>
+                      <el-radio label="0"  value="0">否</el-radio>
                     </el-radio-group>
                   </el-form-item>
-                  <el-form-item label="没有作业请注明原因">
+                  <el-form-item label="没有作业请注明原因" v-show="homeworkshow">
                     <el-input v-model="form.memo"></el-input>
                   </el-form-item>
               </template>  
               <el-form-item label="Comments if any 说明" class="comment" v-if="commentshow">
                 <el-input type="textarea" v-model="form.comment"></el-input>
-              </el-form-item>                                                                         
+              </el-form-item> 
+              <el-form-item label="第几节课" class="comment" v-if="commentshow">
+                <el-input type="textarea" v-model="form.lesson"></el-input>
+              </el-form-item>                                                                                       
             </el-form>
             <div class="exam_btn" style="margin-left:80px;">
               <el-button type="primary" @click="submit">提交跟课报告</el-button>
@@ -63,8 +66,12 @@
         form: {
           comment:'',
           type:'',
-          memo:''
+          memo:'',
+          lesson:''
         },
+        value1:"1",
+        value2:"0",
+        checkedValue:'',
         lesson:"",
         selected:'',
         exam:[],
@@ -72,12 +79,16 @@
         list:[],
         itemName:'',
         data:'',
-        commentshow:false
+        commentshow:false,
+        homeworkshow:false,
+        hometypeshow:false,
+        typeshow:false,
       }
     },
     created(){
       this.getSelectData();
       this.id = localStorage.getItem('classId');
+      console.log(this.checkedValue);
     },
     computed: {
       
@@ -97,11 +108,13 @@
         handelchange(){
            this.getlistData()
            this.form={}
+          console.log(this.checkedValue);
+
+
          },
         getlistData(){
           this.$get('teachers/'+this.id+'/classes/'+this.lesson+'/getclassreport').then((res) => {
             if(res.code === 0){
-              // this.datalength = res.data.length;
               this.commentshow = true;
               if(!res.data.lesson){
                 for(var i=0,len = res.data.length ; i< len;i++){
@@ -109,33 +122,44 @@
                 }
                 this.list = JSON.parse(JSON.stringify(res.data))
                 this.data = res.data;
+               
               }else{
                 // this.list = JSON.parse(JSON.stringify(res.data.itemList))
                 // console.log(res.data.itemList[0].itemName);
                 for(var i=0,len = res.data.itemList.length ; i< len;i++){
                   res.data.itemList[i].itemName = res.data.itemList[i].itemName.split("|")
-                  res.data.itemList[i].exam = res.data.itemList[i].answer?res.data.itemList[i].answer.toString():""
+                  res.data.itemList[i].exam = res.data.itemList[i].answer?res.data.itemList[i].answer.toString():"0"
                 }
                   this.list = JSON.parse(JSON.stringify(res.data.itemList))
                   this.data = res.data;
                   this.form.comment = res.data.comment
-                  this.form.memo = res.data.itemList[0].memo                
+                  this.form.memo = res.data.itemList[8].memo?res.data.itemList[8].memo:''  
+                  this.form.lesson = res.data.lesson  
+                  if(res.data.itemList[8].answer===1){
+                    this.typeshow = true
+                  }else if(res.data.itemList[8].answer===0){
+                    this.homeworkshow = true                     
+                  } 
+                 
+                  console.log(this.typeshow,this.homeworkshow)  
               }
-              // if(res.data.lesson){
-              //   for(var i=0,len = res.data.itemList.length ; i< len;i++){
-              //     res.data.itemList[i].itemName = res.data.itemList[i].itemName.split("|")
-              //     res.data.itemList[i].exam = res.data.itemList[i].answer.toString()?res.data.itemList[i].answer:''
-              //   }
-              //   this.list = JSON.parse(JSON.stringify(res.data.itemList))
-              //   this.data = res.data;
-              //   this.form.comment = res.data.comment
-              //   this.form.memo = res.data.itemList[0].memo
-              // }                            
             }else{
                 this.$message.error('接口数据请求失败');
             }
 
           }).catch(() => {this.loading = false})            
+        },
+        changehome(event){
+          // console.log(event);
+          if(this.list[8].exam === '1'){
+          this.typeshow = true
+          this.homeworkshow = false             
+          }else{
+          this.typeshow = false
+          this.homeworkshow = true
+          }
+                  
+          console.log();
         },
         submit(){
           this.loading = true
@@ -143,30 +167,46 @@
           var item;
           if(!this.data.lesson){
             for(var i=0; i <this.list.length; i++ ){
-              item={"itemId":this.list[i].itemId,"choose":this.list[i].exam?this.list[i].exam:'',"memo":this.form.memo}
+              item={"itemId":this.list[i].itemId,"choose":this.list[i].exam?this.list[i].exam:'',"memo":this.form.memo?this.form.memo:''}
                 this.exam.push(item)
             }            
           }
           if(this.data.lesson){
             for(var i=0; i <this.list.length; i++ ){
-              item={"itemId":this.list[i].itemId,"choose":this.list[i].exam?this.list[i].exam:'',"memo":this.form.memo,"id":this.list[i].id}
+              item={"itemId":this.list[i].itemId,"choose":this.list[i].exam?this.list[i].exam:'',"memo":this.form.memo?this.form.memo:'',"id":this.list[i].id}
                 this.exam.push(item)
             }
           }
           
-            console.log(this.exam);
-            this.$post("teachers/"+this.id+"/classes/"+this.lesson+"/classreports",{
-                lesson:this.lesson,
-                comment : this.form.comment,
-                chooseList: this.exam
-                }).then((res) => {
-              if(res.code === 0){
-                this.$message({message:res.data,type: 'success'});
-                this.$router.push('/index');
-              }else{
-                this.$message.error(res.data);
-              }
-            })          
+            // console.log(this.exam);
+            if(!this.form.lesson){
+               this.$message.error("课时不能为空");
+            }else{
+              this.$post("teachers/"+this.id+"/classes/"+this.lesson+"/classreports",{
+                  lesson:this.form.lesson,
+                  comment : this.form.comment,
+                  chooseList: this.exam
+                  }).then((res) => {
+                  if(res.code === 0){
+                    this.$message({message:res.data,type: 'success'});
+                    this.$router.push('/index');
+                  }else{
+                    this.$message.error(res.data);
+                  }
+              })               
+            }
+            // this.$post("teachers/"+this.id+"/classes/"+this.lesson+"/classreports",{
+            //     lesson:this.form.lesson,
+            //     comment : this.form.comment,
+            //     chooseList: this.exam
+            //     }).then((res) => {
+            //     if(res.code === 0){
+            //       this.$message({message:res.data,type: 'success'});
+            //       this.$router.push('/index');
+            //     }else{
+            //       this.$message.error(res.data);
+            //     }
+            // })          
         }
     }
   }
@@ -214,6 +254,9 @@
   
   .clearfix:after {
       clear: both
+  }
+  .content{
+    padding: 10px!important;
   }
 </style>
 
