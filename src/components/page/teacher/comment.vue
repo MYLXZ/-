@@ -53,7 +53,7 @@
                   <div style="float: left;width: 20%;margin-left: 2%;text-align: justify;text-justify: newspaper;word-break: break-all;">Assignment</div>
               </el-form-item>                
                <el-form-item v-for="item in nameData" v-if="tableshow" style="width: 100%;">
-                  <div style="float: left;width: 30%">{{item.name}}</div>
+                  <div style="float: left;width: 30%">{{item.name}}<br/>{{item.englishName}}</div>
                   <el-input v-model="item.attendance" style="width: 20%;margin-left: 2%;"></el-input>
                   <el-input v-model="item.classParticipation" style="width: 20%;margin-left: 2%;"></el-input>
                   <el-input v-model="item.assignmentSubmission" style="width: 20%;margin-left: 2%;"></el-input>

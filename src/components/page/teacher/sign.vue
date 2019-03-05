@@ -47,9 +47,9 @@
               <el-form-item label="Comments if any 说明" class="comment" v-if="commentshow">
                 <el-input type="textarea" v-model="form.comment"></el-input>
               </el-form-item> 
-              <el-form-item label="第几节课" class="comment" v-if="commentshow">
+             <!--  <el-form-item label="第几节课" class="comment" v-if="commentshow">
                 <el-input type="textarea" v-model="form.lesson"></el-input>
-              </el-form-item>                                                                                       
+              </el-form-item>         -->                                                                               
             </el-form>
             <div class="exam_btn" style="margin-left:80px;">
               <el-button type="primary" @click="submit">提交跟课报告</el-button>
@@ -177,24 +177,35 @@
                 this.exam.push(item)
             }
           }
-          
+          this.$post("teachers/"+this.id+"/classes/"+this.lesson+"/classreports",{
+              // lesson:this.form.lesson,
+              comment : this.form.comment,
+              chooseList: this.exam
+              }).then((res) => {
+              if(res.code === 0){
+                this.$message({message:res.data,type: 'success'});
+                this.$router.push('/index');
+              }else{
+                this.$message.error(res.data);
+              }
+          })                      
             // console.log(this.exam);
-            if(!this.form.lesson){
-               this.$message.error("课时不能为空");
-            }else{
-              this.$post("teachers/"+this.id+"/classes/"+this.lesson+"/classreports",{
-                  lesson:this.form.lesson,
-                  comment : this.form.comment,
-                  chooseList: this.exam
-                  }).then((res) => {
-                  if(res.code === 0){
-                    this.$message({message:res.data,type: 'success'});
-                    this.$router.push('/index');
-                  }else{
-                    this.$message.error(res.data);
-                  }
-              })               
-            }
+            // if(!this.form.lesson){
+            //    this.$message.error("课时不能为空");
+            // }else{
+            //   this.$post("teachers/"+this.id+"/classes/"+this.lesson+"/classreports",{
+            //       // lesson:this.form.lesson,
+            //       comment : this.form.comment,
+            //       chooseList: this.exam
+            //       }).then((res) => {
+            //       if(res.code === 0){
+            //         this.$message({message:res.data,type: 'success'});
+            //         this.$router.push('/index');
+            //       }else{
+            //         this.$message.error(res.data);
+            //       }
+            //   })               
+            // }
             // this.$post("teachers/"+this.id+"/classes/"+this.lesson+"/classreports",{
             //     lesson:this.form.lesson,
             //     comment : this.form.comment,
