@@ -3,6 +3,27 @@
         <router-view></router-view>
     </div>
 </template>
+export default {
+	name:'app',
+	provide(){
+		return {
+			reload: this.reload
+		}
+	},
+	data(){
+		return{
+			isRouterAlive:true
+		}
+	},
+	methods:{
+		reload(){
+			this.isRouterAlive = false
+			this.$nextTick(function(){
+				this.isRouterAlive = true
+			})
+		}	
+	}
+}
 <style>
     @import "../static/css/color-dark.css";     /*深色主题*/
     /*@import "../static/css/theme-green/color-green.css";   浅绿色主题*/

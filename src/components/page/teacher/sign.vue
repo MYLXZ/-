@@ -20,7 +20,7 @@
                     </el-radio-group>
                   </el-form-item>
               </template>  
-              <div  v-for="(item, index) in list" v-if='index==9' v-show="typeshow">
+              <!-- <div  v-for="(item, index) in list" v-if='index==9' v-show="typeshow">
                 <div>{{item.itemName[0]}}</div>
                 <div>{{item.itemName[1]}}</div>                
                  <el-form-item>
@@ -30,7 +30,7 @@
                       <el-radio label="3">小组作业</el-radio>
                     </el-radio-group>
                   </el-form-item>
-              </div>   
+              </div>    -->
               <template  v-for="(item, index) in list" v-if='index==8'>
                 <div>{{item.itemName[0]}}</div>
                 <div>{{item.itemName[1]}}</div>                
@@ -44,6 +44,17 @@
                     <el-input v-model="form.memo"></el-input>
                   </el-form-item>
               </template>  
+              <div  v-for="(item, index) in list" v-if='index==9' v-show="typeshow">
+                <div>{{item.itemName[0]}}</div>
+                <div>{{item.itemName[1]}}</div>                
+                 <el-form-item>
+                    <el-radio-group v-model="item.exam">
+                      <el-radio label="1">书面作业</el-radio>
+                      <el-radio label="2">口头作业</el-radio>
+                      <el-radio label="3">小组作业</el-radio>
+                    </el-radio-group>
+                  </el-form-item>
+              </div>                 
               <el-form-item label="Comments if any 说明" class="comment" v-if="commentshow">
                 <el-input type="textarea" v-model="form.comment"></el-input>
               </el-form-item> 
@@ -116,7 +127,7 @@
           this.$get('teachers/'+this.id+'/classes/'+this.lesson+'/getclassreport').then((res) => {
             if(res.code === 0){
               this.commentshow = true;
-              if(!res.data.lesson){
+              if(!res.data.comment){
                 for(var i=0,len = res.data.length ; i< len;i++){
                   res.data[i].itemName = res.data[i].itemName.split("|")
                 }
@@ -165,13 +176,13 @@
           this.loading = true
           this.exam = []  
           var item;
-          if(!this.data.lesson){
+          if(!this.data.comment){
             for(var i=0; i <this.list.length; i++ ){
               item={"itemId":this.list[i].itemId,"choose":this.list[i].exam?this.list[i].exam:'',"memo":this.form.memo?this.form.memo:''}
                 this.exam.push(item)
             }            
           }
-          if(this.data.lesson){
+          if(this.data.comment){
             for(var i=0; i <this.list.length; i++ ){
               item={"itemId":this.list[i].itemId,"choose":this.list[i].exam?this.list[i].exam:'',"memo":this.form.memo?this.form.memo:'',"id":this.list[i].id}
                 this.exam.push(item)

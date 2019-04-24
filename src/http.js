@@ -3,8 +3,8 @@ import { Message } from 'element-ui';
 
 axios.defaults.timeout = 15000;
 axios.defaults.baseURL ='';
-var URL = "http://47.92.217.27:7002/"
-// var URL = "http://192.168.16.141:7002/"
+// var URL = "http://47.92.217.27:7002/"
+var URL = "http://192.168.16.141:7002/"
 
 //http request 拦截器
 axios.interceptors.request.use(

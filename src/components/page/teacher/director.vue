@@ -9,20 +9,25 @@
                       <el-option v-for="item in classes" :key="item.id" :label="item.className" :value="item.id"></el-option>
                     </el-select>  
               	</el-form-item>
-				<el-form-item v-if="tableshow" label="Local teacher合作学校老师：">
+				<!-- <el-form-item v-if="tableshow" label="Local teacher合作学校老师：">
               		<el-input type="text" v-model="form.localTeacher" style="margin-top: 10px;" placeholder="请输入Local teacher合作学校老师"></el-input>
-              	</el-form-item>
+              	</el-form-item> -->
 				<el-form-item v-if="tableshow" label="Time duration 听课时段：">
               		<el-input type="text" v-model="form.duration" style="margin-top: 10px;" placeholder="请输入Time duration 听课时段"></el-input>
               	</el-form-item>              	    
-				<el-form-item v-if="tableshow" label="Sales manager 销售经理：">
+				<!-- <el-form-item v-if="tableshow" label="Sales manager 销售经理：">
               		<el-input type="text" v-model="form.salesManager" style="margin-top: 10px;" placeholder="请输入Sales manager 销售经理"></el-input>
-              	</el-form-item>   
+              	</el-form-item>    -->
 				<el-form-item v-if="tableshow" label="Observer听课人：">
               		<el-input type="text" v-model="form.observer" style="margin-top: 10px;" placeholder="请输入Observer听课人"></el-input>
               	</el-form-item>                 	           	              	
               	<el-form-item v-if="tableshow">
-					<div class="exam-title">Evaluation 评估标准5：exceeds expectations优秀4：highly proficient 良好3：satisfactorily 合格2：need improvement待改进</div>
+					<div class="exam-title">Evaluation 评估标准<br/>
+						5：exceeds expectations&nbsp;优秀&nbsp;&nbsp;
+						4：highly proficient&nbsp;良好&nbsp;&nbsp;&nbsp;
+						3：satisfactorily&nbsp;合格&nbsp;&nbsp;&nbsp;
+						2：need improvement&nbsp;待改进
+					</div>
 					<div class="exam-title">RUBRICS</div>
 					<template  v-for="(item, index) in list.rubrics">
 		                <div>{{item.itemName}}</div>
@@ -33,7 +38,7 @@
 		                      <el-radio label="4"></el-radio>
 		                      <el-radio label="3"></el-radio>
 		                      <el-radio label="2"></el-radio>
-		                      <el-radio label="1"></el-radio>
+		                      <!-- <el-radio label="1"></el-radio> -->
 		                    </el-radio-group>
 		                  </el-form-item>
 		            </template>                     		
@@ -50,7 +55,7 @@
 		                      <el-radio label="4"></el-radio>
 		                      <el-radio label="3"></el-radio>
 		                      <el-radio label="2"></el-radio>
-		                      <el-radio label="1"></el-radio>
+		                      <!-- <el-radio label="1"></el-radio> -->
 		                    </el-radio-group>
 		                  </el-form-item>
 		            </template>                     		
@@ -67,7 +72,7 @@
 		                      <el-radio label="4"></el-radio>
 		                      <el-radio label="3"></el-radio>
 		                      <el-radio label="2"></el-radio>
-		                      <el-radio label="1"></el-radio>
+		                      <!-- <el-radio label="1"></el-radio> -->
 		                    </el-radio-group>
 		                  </el-form-item>
 		            </template>                     		
@@ -84,14 +89,14 @@
 		                      <el-radio label="4"></el-radio>
 		                      <el-radio label="3"></el-radio>
 		                      <el-radio label="2"></el-radio>
-		                      <el-radio label="1"></el-radio>
+		                      <!-- <el-radio label="1"></el-radio> -->
 		                    </el-radio-group>
 		                  </el-form-item>
 		            </template>                     		
               	</el-form-item> 
 
 				<el-form-item v-if="tableshow">
-					<div class="exam-title">ASSESSING STUDENT LEARNING学习评估</div>
+					<!-- <div class="exam-title">ASSESSING STUDENT LEARNING学习评估</div> -->
 					<template  v-for="(item, index) in list.assessingStudentLearning">
 		                <div>{{item.itemName}}</div>
 		                <!-- <div>{{item.itemName[1]}}</div> -->
@@ -101,14 +106,14 @@
 		                      <el-radio label="4"></el-radio>
 		                      <el-radio label="3"></el-radio>
 		                      <el-radio label="2"></el-radio>
-		                      <el-radio label="1"></el-radio>
+		                      <!-- <el-radio label="1"></el-radio> -->
 		                    </el-radio-group>
 		                  </el-form-item>
 		            </template>                     		
               	</el-form-item>   
 
 				<el-form-item v-if="tableshow">
-					<div class="exam-title">ASSESSING STUDENT LEARNING学习评估</div>
+					<!-- <div class="exam-title">ASSESSING STUDENT LEARNING学习评估</div> -->
 					<template  v-for="(item, index) in list.planningDesigningAndDelivering">
 		                <div>{{item.itemName}}</div>
 		                <!-- <div>{{item.itemName[1]}}</div> -->
@@ -118,7 +123,7 @@
 		                      <el-radio label="4"></el-radio>
 		                      <el-radio label="3"></el-radio>
 		                      <el-radio label="2"></el-radio>
-		                      <el-radio label="1"></el-radio>
+		                      <!-- <el-radio label="1"></el-radio> -->
 		                    </el-radio-group>
 		                  </el-form-item>
 		            </template>                     		
@@ -149,8 +154,8 @@
           comment:'',
           reflection:'',
           duration:'',
-          localTeacher:'',
-          salesManager:'',
+          // localTeacher:'',
+          // salesManager:'',
           observer:''
         },
         lesson:"",
@@ -205,9 +210,11 @@
               this.tableshow = true;
             if(!res.data.other){
                 this.list = JSON.parse(JSON.stringify(res.data))
-                // console.log(this.list);
+                // this.returndata = res.data;
+                console.log(this.list);
             }else{
               	this.list = JSON.parse(JSON.stringify(res.data))
+                console.log(this.list);
                 this.form = res.data.other 
                 this.returndata = res.data;  
                 // for(var i=0;i<res.data.length;i++){
@@ -249,7 +256,7 @@
 	        var item;
 	        var other=[]
 	        // console.log(this.returndata);
-	        if(!this.returndata.other){
+	        if(!this.list.other){
 	            for(var i=0; i <this.list.assessingStudentLearning.length; i++ ){
 	              item={"itemId":this.list.assessingStudentLearning[i].itemId,"choose":this.list.assessingStudentLearning[i].exam?this.list.assessingStudentLearning[i].exam:''}
 	                this.exam.push(item)
@@ -266,14 +273,14 @@
 	              item={"itemId":this.list.observerComments[i].itemId,"choose":this.list.observerComments[i].exam?this.list.observerComments[i].exam:''}
 	                this.exam.push(item)
 	            } 		            
-				for(var i=0; i <this.list.lecturerReflection.length; i++ ){
-	              item={"itemId":this.list.lecturerReflection[i].itemId,"choose":this.list.lecturerReflection[i].exam?this.list.lecturerReflection[i].exam:''}
-	                this.exam.push(item)
-	            } 	                         
-	 			for(var i=0; i <this.list.planningDesigningAndDelivering.length; i++ ){
-	              item={"itemId":this.list.planningDesigningAndDelivering[i].itemId,"choose":this.list.planningDesigningAndDelivering[i].exam?this.list.planningDesigningAndDelivering[i].exam:''}
-	                this.exam.push(item)
-	            }              
+				// for(var i=0; i <this.list.lecturerReflection.length; i++ ){
+	   //            item={"itemId":this.list.lecturerReflection[i].itemId,"choose":this.list.lecturerReflection[i].exam?this.list.lecturerReflection[i].exam:''}
+	   //              this.exam.push(item)
+	   //          } 	                         
+	 			// for(var i=0; i <this.list.planningDesigningAndDelivering.length; i++ ){
+	    //           item={"itemId":this.list.planningDesigningAndDelivering[i].itemId,"choose":this.list.planningDesigningAndDelivering[i].exam?this.list.planningDesigningAndDelivering[i].exam:''}
+	    //             this.exam.push(item)
+	    //         }              
 	 			for(var i=0; i <this.list.rubrics.length; i++ ){
 	              item={"itemId":this.list.rubrics[i].itemId,"choose":this.list.rubrics[i].exam?this.list.rubrics[i].exam:''}
 	                this.exam.push(item)
@@ -301,14 +308,14 @@
 	              item={"id":this.list.observerComments[i].id,"choose":this.list.observerComments[i].exam?this.list.observerComments[i].exam:''}
 	                this.exam.push(item)
 	            } 		            
-				for(var i=0; i <this.list.lecturerReflection.length; i++ ){
-	              item={"itemId":this.list.lecturerReflection[i].id,"choose":this.list.lecturerReflection[i].exam?this.list.lecturerReflection[i].exam:''}
-	                this.exam.push(item)
-	            } 	                         
-	 			for(var i=0; i <this.list.planningDesigningAndDelivering.length; i++ ){
-	              item={"id":this.list.planningDesigningAndDelivering[i].id,"choose":this.list.planningDesigningAndDelivering[i].exam?this.list.planningDesigningAndDelivering[i].exam:''}
-	                this.exam.push(item)
-	            }              
+				// for(var i=0; i <this.list.lecturerReflection.length; i++ ){
+	   //            item={"itemId":this.list.lecturerReflection[i].id,"choose":this.list.lecturerReflection[i].exam?this.list.lecturerReflection[i].exam:''}
+	   //              this.exam.push(item)
+	   //          } 	                         
+	 			// for(var i=0; i <this.list.planningDesigningAndDelivering.length; i++ ){
+	    //           item={"id":this.list.planningDesigningAndDelivering[i].id,"choose":this.list.planningDesigningAndDelivering[i].exam?this.list.planningDesigningAndDelivering[i].exam:''}
+	    //             this.exam.push(item)
+	    //         }              
 	 			for(var i=0; i <this.list.rubrics.length; i++ ){
 	              item={"id":this.list.rubrics[i].id,"choose":this.list.rubrics[i].exam?this.list.rubrics[i].exam:''}
 	                this.exam.push(item)
@@ -324,7 +331,8 @@
                 }).then((res) => {
               if(res.code === 0){
                 this.$message({message:res.data,type: 'success'});
-                 this.tableshow = false;
+                this.tableshow = false;
+                 // this.$router.go(0)
                 // window.reload()
               }else{
                 this.$message.error(res.data);
