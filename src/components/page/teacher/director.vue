@@ -132,10 +132,10 @@
 					<div class="exam-title">Observer Comments 教学主任评语：</div>
               		<el-input type="textarea" v-model="form.comment" style="margin-top: 20px;"></el-input>
               	</el-form-item>   
-				<el-form-item v-if="tableshow">
+				<!-- <el-form-item v-if="tableshow">
 					<div class="exam-title">Lecturer Reflection on the Lesson 授课老师课后教学反思：</div>
               		<el-input type="textarea" v-model="form.reflection" style="margin-top: 20px;"></el-input>
-              	</el-form-item>              	             	                 	         	
+              	</el-form-item>    -->           	             	                 	         	
             </el-form>
         	<div class="exam_btn" style="margin-left:80px;">
           		<el-button type="primary" @click="submit">提交跟课报告</el-button>
@@ -152,7 +152,7 @@
       return {
         form: {
           comment:'',
-          reflection:'',
+          // reflection:'',
           duration:'',
           // localTeacher:'',
           // salesManager:'',
